@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Food Delivery Service</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <% include partials/header %>
+    <section id="menu">
+        <h1>Our Menu</h1>
+        <div class="dishes-container">
+            <!-- Your dishes here -->
+        </div>
+        <form id="order-form">
+            <h2>Place Your Order</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            <label for="dish">Dish:</label>
+            <input type="text" id="dish" name="dish" required>
+            <button type="submit">Confirm Order</button>
+        </form>
+    </section>
+    <div id="order-confirmation" style="display: none;">
+        <h1>Order Confirmation</h1>
+        <p>Thank you, <span id="customer-name"></span>! Your order for <span id="customer-dish"></span> has been received.</p>
+        <p>We will deliver it to <span id="customer-address"></span> shortly.</p>
+    </div>
+    <script src="/js/scripts.js"></script>
+    <% include partials/footer %>
+</body>
+</html>
