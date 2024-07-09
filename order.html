@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Your Order - Food Delivery Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Food Delivery Service</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="order.html">order</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+      
+                                  
+                                <section id="order">
+                                    <h1>Place Your Order</h1>
+                                    <div class="dishes-container">
+                                        <!-- Add your dishes here -->
+                                        <div class="dish">
+                                            <img src="photos/Aloo-Gobi.jpg" alt="Aloo-Gobi">
+                                            <h3>Aloo-Gobi</h3>
+                                            <p>A delicious & flavor packed dish of spiced potatoes & cauliflowe</p>
+                                            <button class="add-to-cart" data-dish="allo Aloo-Gobi">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/biryani.jpg" alt="biryani">
+                                            <h3>Biryani</h3>
+                                            <p>A fragrant and flavorful rice dish</p>
+                                            <button class="add-to-cart" data-dish="biryani">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/Butter-Chicken.jpg" alt="Butter-Chicken">
+                                            <h3>Butter-Chicken</h3>
+                                            <p>A creamy and flavorful chicken dish.</p>
+                                            <button class="add-to-cart" data-dish="Butter-Chicken">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/palak-panner.jpg" alt="palak-panner">
+                                            <h3>Palak-panner</h3>
+                                            <p>A spinach and paneer dish.</p>
+                                            <button class="add-to-cart" data-dish="palak-panner">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/dosa.jpg" alt="Dosa">
+                                            <h3>Masala Dosa</h3>
+                                            <p>asala Dosa is a popular South Indian dish consisting of a thin, crispy rice and lentil crepe filled with a spicy potato filling.</p>
+                                            <button class="add-to-cart" data-dish="dosa">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/chole-bhature.jpg" alt="chole-bhature">
+                                            <h3>chole-bhature</h3>
+                                            <p>A spicy chickpea curry served with fried bread.</p>
+                                            <button class="add-to-cart" data-dish="chole-bhature">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/paneer-tikka.jpg" alt="paneer-tikka">
+                                            <h3>Paneer-tikka</h3>
+                                            <p>Marinated paneer cubes grilled to perfection.</p>
+                                            <button class="add-to-cart" data-dish="Paneer-tikka">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/Dal-Makhani.jpg" alt="Dal-Makhani">
+                                            <h3>Dal-Makhani</h3>
+                                            <p>A rich and creamy lentil dish.</p>
+                                            <button class="add-to-cart" data-dish="Dal-Makhani">Add to Cart</button>
+                                        </div>
+                                        <div class="dish">
+                                            <img src="photos/tandoori.jpg" alt="tandoori-chicken">
+                                            <h3>Tandoori-chicken</h3>
+                                            <p>A spicy and flavorful grilled chicken dish.</p>
+                                            <button class="add-to-cart" data-dish="tandoori-chicken">Add to Cart</button>
+                                        </div>
+
+                                        <!-- Add more dishes as needed -->
+                                    </div>
+                                    <section id="cart">
+                                        <h2>Your Cart</h2>
+                                        <ul id="cart-items"></ul>
+                                        <form id="order-form">
+                                            <h2>Confirm Your Order</h2>
+                                            <label for="name">Name:</label>
+                                            <input type="text" id="name" name="name" required>
+                                            <label for="address">Address:</label>
+                                            <input type="text" id="address" name="address" required>
+                                            <button type="submit">Confirm Order</button>
+                                        </form>
+                                    </section>
+                                </section>
+                            </main>
+                            <footer>
+                                <p>&copy; 2024 Food Delivery Service. All rights reserved.</p>
+                            </footer>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const cart = [];
+                                    const cartItemsContainer = document.getElementById('cart-items');
+                        
+                                    document.querySelectorAll('.add-to-cart').forEach(button => {
+                                        button.addEventListener('click', function() {
+                                            const dish = this.dataset.dish;
+                                            cart.push(dish);
+                                            updateCart();
+                                        });
+                                    });
+                        
+                                    function updateCart() {
+                                        cartItemsContainer.innerHTML = '';
+                                        cart.forEach((item, index) => {
+                                            const li = document.createElement('li');
+                                            li.textContent = item;
+                                            const removeButton = document.createElement('button');
+                                            removeButton.textContent = 'Remove';
+                                            removeButton.addEventListener('click', () => {
+                                                cart.splice(index, 1);
+                                                updateCart();
+                                            });
+                                            li.appendChild(removeButton);
+                                            cartItemsContainer.appendChild(li);
+                                        });
+                                    }
+                        
+                                    document.getElementById('order-form').addEventListener('submit', function(event) {
+                                        event.preventDefault();
+                                        const name = document.getElementById('name').value;
+                                        const address = document.getElementById('address').value;
+                                        const dishes = cart.join(', ');
+                                        const params = new URLSearchParams({ name, address, dish: dishes }).toString();
+                                        window.location.href = 'order-confirmation.html?' + params;
+                                    });
+                                });
+                            </script>
+                            <script src="main.js"></script>
+                            
+                        </body>
+                        </html>
+                       
